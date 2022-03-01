@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd_pwd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aprotoce <aprotoce@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 12:50:48 by aprotoce          #+#    #+#             */
-/*   Updated: 2022/02/28 22:10:20 by aprotoce         ###   ########.fr       */
+/*   Updated: 2022/02/28 23:24:13 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	printpwd(t_parse_data data)
 	ft_putchar_fd('\n', data.fd_out);
 }
 
-void	changeDir(t_parse_data data)
+void	changedir(t_parse_data data)
 {
 	char	cwd[4096];
 	int		status;

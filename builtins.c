@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvarussa <vvarussa@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 12:05:54 by aprotoce          #+#    #+#             */
-/*   Updated: 2022/02/28 13:27:33 by vvarussa         ###   ########.fr       */
+/*   Updated: 2022/03/01 00:03:41 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,5 @@ void	exec_builtin(t_parse_data data)
 	if (!(ft_strncmp(data.args[0], "pwd", 3)))
 		printpwd(data);
 	if (!(ft_strncmp(data.args[0], "cd", 2)))
-		changeDir(data);
+		changedir(data);
 }

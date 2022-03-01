@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aprotoce <aprotoce@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 14:23:55 by vvarussa          #+#    #+#             */
-/*   Updated: 2022/02/28 22:11:18 by aprotoce         ###   ########.fr       */
+/*   Updated: 2022/03/01 00:05:39 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 t_parse_data	parse_in(t_parse_data aux);
 t_parse_data	parse_out(t_parse_data aux, t_node *other_pipes);
 
@@ -44,16 +45,10 @@ void	process_cmd(t_parse_data data)
 			exec_command(data);
 		free(data.bin_path);
 	}
+	if (data.assigment != NULL)
+		free_simple_node(data.assigment);
 	free_str_array(data.args);
 	free_str_array(data.envp);
-}
-
-t_parse_data	init_parse(t_parse_data aux, t_node **dict)
-{
-	aux.last_was_pipe = 0;
-	aux.assigment = NULL;
-	aux.dict = dict;
-	return (aux);
 }
 
 t_parse_data	pipe_parse(t_parse_data aux)
@@ -69,7 +64,10 @@ void	parse(t_node *token_list, t_node **dict)
 	t_node			*sub_token_list;
 	t_parse_data	data;
 
-	data = init_parse(data, dict);
+	data.last_was_pipe = 0;
+	data.assigment = NULL;
+	data.dict = dict;
+	data.args = NULL;
 	while (token_list != NULL)
 	{
 		data = pipe_parse(data);
@@ -81,7 +79,7 @@ void	parse(t_node *token_list, t_node **dict)
 			continue ;
 		data = parse_assigment(data);
 		data = parse_cmd_and_args(data);
-		if (token_list == NULL && data.assigment != NULL && !data.last_was_pipe)
+		if (*data.args == NULL && data.assigment != NULL && !data.last_was_pipe)
 			assign_var(data);
 		else if (*data.args != NULL)
 			process_cmd(data);

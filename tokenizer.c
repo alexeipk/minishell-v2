@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aprotoce <aprotoce@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 14:24:42 by vvarussa          #+#    #+#             */
-/*   Updated: 2022/02/26 13:27:24 by aprotoce         ###   ########.fr       */
+/*   Updated: 2022/03/01 01:12:20 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,18 @@ void	token_quote(t_node **list, char **line, char q)
 	if (**line == q)
 	{
 		*line = *line + 1;
+		if (**line == q)
+		{
+			*line = *line + 1;
+			return ;
+		}
 		while (**line != q && **line)
 		{
 			token = temp_str(**line);
 			*line = *line + 1;
 		}
-		if (**line != q)
-		{
-			errno = 501;
+		if (set_errno(**line != q, 501))
 			return ;
-		}
 		if (q == '\"')
 			add_token_to_list(list, token, 0);
 		else

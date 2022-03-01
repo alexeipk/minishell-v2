@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_aux1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aprotoce <aprotoce@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 13:02:24 by aprotoce          #+#    #+#             */
-/*   Updated: 2022/02/26 13:02:24 by aprotoce         ###   ########.fr       */
+/*   Updated: 2022/03/01 01:12:22 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,11 @@ char	*temp_str2(char c)
 	*(str + size) = c;
 	*(str + size + 1) = '\0';
 	return (str);
+}
+
+int	set_errno(int condition, int error)
+{
+	if (condition)
+		errno = error;
+	return (condition);
 }

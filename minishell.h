@@ -3,35 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvarussa <vvarussa@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 14:23:38 by vvarussa          #+#    #+#             */
-/*   Updated: 2022/02/28 12:34:45 by vvarussa         ###   ########.fr       */
+/*   Updated: 2022/03/01 01:12:43 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/stat.h>
-#include <stdio.h>
-#include "libft.h"
-#include <stdlib.h>
-#include <unistd.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <signal.h>
-#include <sys/wait.h>
-#include <errno.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+#ifndef MINISHELL_H
+# define MINISHELL_H
+
+# include <sys/stat.h>
+# include <stdio.h>
+# include "libft.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <errno.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <signal.h>
+# include <sys/wait.h>
+# include <errno.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
 # define BOLD_H_GREEN	"\e[1;92m"
 # define BOLD_H_YELLOW	"\e[1;93m"
 # define BOLD_H_BLUE	"\e[1;94m"
 # define BOLD_H_MAGENTA	"\e[1;95m"
-# define BOLD_H_CYAN	"\e[1;96m"
-# define CBW	"\e[1;97m" //color BOLD AND WHITE
+# define BOLD_H_CYAN		"\e[1;96m"
+# define CBW				"\e[1;97m" //color BOLD AND WHITE
 # define RESET			"\e[0m"
-#define SIZE_OF_TEMP 100
-#define DICT_ARRAY_SIZE 50
+# define SIZE_OF_TEMP 100
+# define DICT_ARRAY_SIZE 50
 
 typedef struct s_node
 {
@@ -83,7 +87,8 @@ void			free_simple_node(t_node *node);
 t_node			*remove_node_from_list(t_node *list, t_node *node);
 
 /*dict*/
-void			add_dict_value(t_node **dict, char *key, char *value, int is_env);
+void			add_dict_value(t_node **dict, char *key,
+					char *value, int is_env);
 int				env_size(t_node **dict);
 t_node			*find_dict_node(t_node **dict, char *key);
 char			*find_var(t_node **dict, char *key);
@@ -118,6 +123,7 @@ char			*temp_str(char c);
 char			*temp_str2(char c);
 char			*add_str_to_temp(char *str);
 int				is_char_in_set(char c, char *set);
+int				set_errno(int condition, int error);
 
 /*vars*/
 char			*replace_vars_in_str(t_node **dict, char *str);
@@ -161,10 +167,11 @@ char			*check_command_path(t_parse_data data);
 void			exec_command(t_parse_data data);
 
 /*builtins*/
-void			changeDir(t_parse_data data);
+void			changedir(t_parse_data data);
 void			printpwd(t_parse_data data);
 void			exit_minishell(t_parse_data data);
 int				echo_cmd(t_parse_data data);
 int				check_builtin(t_parse_data data);
 void			exec_builtin(t_parse_data data);
 
+#endif
