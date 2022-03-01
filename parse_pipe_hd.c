@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_pipe_hd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aprotoce <aprotoce@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 15:13:37 by aprotoce          #+#    #+#             */
-/*   Updated: 2022/02/26 15:13:37 by aprotoce         ###   ########.fr       */
+/*   Updated: 2022/03/01 01:46:06 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	here_doc(char *delimiter)
 	{
 		write(pipe_fd[1], line, strlen(line));
 		write(pipe_fd[1], "\n", 1);
+		free(line);
 		line = readline("> ");
 	}
 	free(delimiter);
